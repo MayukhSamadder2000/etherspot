@@ -3,15 +3,12 @@ import { useState } from "react";
 import {
   StyleSheet,
   Text,
-  Button,
   View,
   TextInput,
-  Alert,
   TouchableOpacity,
 } from "react-native";
-import { Sdk, MetaMaskWalletProvider, randomPrivateKey, NetworkNames, EnvNames, Env } from "etherspot";
-import { ethers, Wallet } from "ethers";
-import Web3Modal from "web3modal";
+import { Sdk, MetaMaskWalletProvider, randomPrivateKey, NetworkNames, EnvNames } from "etherspot";
+import { ethers } from "ethers";
 
 export default function App() {
   const [ethAmount, setEthAmount] = useState();
@@ -23,7 +20,7 @@ export default function App() {
     setWalletAddress(text);
   };
 
-  async function initSession(){
+  async function transfer(){
     if (!MetaMaskWalletProvider.detect()) {
       console.log("MetaMask not detected");
       return;
@@ -81,7 +78,7 @@ export default function App() {
       <TouchableOpacity
         style={styles.button}
         disabled={!walletAddress && !ethAmount}
-        onPress={initSession}
+        onPress={transfer}
       >
         <Text
           style={{
